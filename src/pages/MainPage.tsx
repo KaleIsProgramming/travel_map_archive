@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { MapChart } from "../components";
+import { MapChart } from "../components/main_page";
 
 export const MainPage = () => {
     return(
