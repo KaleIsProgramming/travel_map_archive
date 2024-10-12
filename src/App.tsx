@@ -1,12 +1,20 @@
 import styled from "@emotion/styled";
+import { Routes, Route } from "react-router-dom";
 import { NavBar } from "./components";
-import { MainPage } from "./pages";
+import { MainPage, DashboardPage, FliesPage, VisitedCoutriesPage } from "./pages";
 
 const App = () => {
   return (
     <StyledApp>
       <NavBar />
-      <MainPage />
+      <Routes>
+        <Route path="/">
+          <Route index element={<MainPage />} />
+          <Route path="/visited_countries" element={<VisitedCoutriesPage />} />
+          <Route path="/flies" element={<FliesPage />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
+        </ Route>
+      </Routes>
     </StyledApp>
   );
 }

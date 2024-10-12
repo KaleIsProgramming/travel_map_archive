@@ -56,6 +56,7 @@ export const MapChart = () => {
                   fill={isClicked ? "#57c9f2" : "#D6D6DA"}
                   style={{
                     default: {
+                      stroke: "#FFFFFF",
                       outline: "none",
                     },
                     hover: {
