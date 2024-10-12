@@ -5,37 +5,37 @@ import { ComposableMap, Geographies, Geography } from "react-simple-maps";
 const geoUrl = "/countries.json";
 
 export const MapChart = () => {
-  const [clickedCity, setClickedCity] = useState<any>([]);
+  const [clickedCountries, setclickedCountries] = useState<any>([]);
 
   const handleClick = (geo:any) => {
     let isClicked = false;
-    clickedCity.forEach((country:any) => {
+    clickedCountries.forEach((country:any) => {
         if(geo.properties.name === country) {
             isClicked = true;
         }
     });
 
     if(isClicked) {
-        let newClickedCountries:any = clickedCity.filter((country:any) => country !== geo.properties.name);
-        setClickedCity(newClickedCountries)
+        let newClickedCountries:any = clickedCountries.filter((country:any) => country !== geo.properties.name);
+        setclickedCountries(newClickedCountries)
     } else {
-        setClickedCity([...clickedCity, geo.properties.name]);
+        setclickedCountries([...clickedCountries, geo.properties.name]);
     }
-    
-
-    
   };
-  console.log(clickedCity)
+
   return (
     <MapContainer>
-      <ComposableMap>
+      <Header>
+        Where have you been?
+      </Header>
+      <StyledComposableMap>
         <Geographies geography={geoUrl}>
           {({ geographies }) =>
             geographies.map((geo) => {
 
               const isClickedHandler:any = () => {
                 let isClickedCountry = false;
-                clickedCity.forEach((country:string) => {
+                clickedCountries.forEach((country:string) => {
                     if(country === geo.properties.name) {
                         isClickedCountry = true;
                     }
@@ -45,7 +45,7 @@ export const MapChart = () => {
               };
               let isClicked = false;
 
-              if(clickedCity[0] !== undefined) {
+              if(clickedCountries[0] !== undefined) {
                 isClicked = isClickedHandler();
               }
               return (
@@ -72,7 +72,7 @@ export const MapChart = () => {
             })
           }
         </Geographies>
-      </ComposableMap>
+      </StyledComposableMap>
     </MapContainer>
   );
 };
@@ -80,4 +80,21 @@ export const MapChart = () => {
 const MapContainer = styled.div`
   height: 100%;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+`;
+
+const Header = styled.h1`
+  height: 120px;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;  
+`;
+
+const StyledComposableMap = styled(ComposableMap)`
+    height: 70%;  
+    margin-bottom: calc(30% - 120px);
 `;
