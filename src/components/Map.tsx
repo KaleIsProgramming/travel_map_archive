@@ -8,7 +8,20 @@ export const MapChart = () => {
   const [clickedCity, setClickedCity] = useState<any>([]);
 
   const handleClick = (geo:any) => {
-    setClickedCity([...clickedCity, geo.properties.name]);
+    let isClicked = false;
+    clickedCity.forEach((country:any) => {
+        if(geo.properties.name === country) {
+            isClicked = true;
+        }
+    });
+
+    if(isClicked) {
+        let newClickedCountries:any = clickedCity.filter((country:any) => country !== geo.properties.name);
+        setClickedCity(newClickedCountries)
+    } else {
+        setClickedCity([...clickedCity, geo.properties.name]);
+    }
+    
 
     
   };
